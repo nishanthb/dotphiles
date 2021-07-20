@@ -1,0 +1,29 @@
+#hardstatus alwayslastline "%{= KW}%-w%{= gk}%50>%n %t%{-}%+w%<"
+#hardstatus alwayslastline '%{= kG}[ %{G}%H %{g}]%{= KW}%-w%{= gk}%50>%n %t%{-}%+w%< [%{B} %d/%m %{W}%c %{g}]\n[Dates: %2`]'
+vbell on
+defmonitor on
+compacthist on
+multiuser on
+#acladd ewewegfw QSsUHyAXX/lmL5CM #password for users - user types screen -x abcd/
+#aclchg  efwefwef +r		# User types  screen -rx abcd/
+term xterm-color
+defscrollback 1000
+backtick 1 3600 3600 sh -c "mktemp -u /Users/abcd/log/screenlog.`whoami`.`TZ=UTC date +%Y%m%d%H%M`.XXXXXX"
+backtick 2 0 10 sh -c "echo $(date +%s) :: Now: $(date '+%Y/%m/%d %H:%M') ::  UTC: $(date -u '+%Y/%m/%d %H:%M') ::  US: $(TZ=PST8PDT date '+%Y/%m/%d %H:%M')"
+caption always '%{= kG}[ %{G}%H %{g}]%{= KW}%-w%{= gk}%50>%n %t%{-}%+w%< [%{B} %d/%m %{W}%c %{g}]'
+hardstatus alwayslastline '%{= kG}[Dates: %2`%{g}]'
+hardstatus on
+startup_message off
+autodetach on
+chdir
+defutf8 on
+logfile %1`%n
+logfile flush 1
+deflog on
+logtstamp on
+windowlist string "%3n %t   %h%=%f"
+#altscreen on
+# Read from SSH socket created on SSH
+# alternately, in screen, type - at "#" stuff "source ~/.ssh/.info^M"
+# to source the env on all screens, but this only works if the sessions are not logged on to other boxen
+#setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
